@@ -6,6 +6,6 @@ scikit-learn
 scipy
 catboost
 xgboost
-#stqdm
+stqdm
 #streamlit
 -e .
