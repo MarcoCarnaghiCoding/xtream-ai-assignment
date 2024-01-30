@@ -2,10 +2,12 @@ pandas
 numpy
 seaborn
 matplotlib
-scikit-learn
+scikit-learn == 1.2.2
 scipy
-catboost
 xgboost
 stqdm
+dill
+flask
+joblib
 #streamlit
 -e .
