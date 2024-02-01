@@ -1,5 +1,15 @@
 import requests
 
+"""
+Module to generate test cases for the API endpoint.
+
+This module contains examples of single sets of features to be used for testing the API endpoint.
+
+Examples:
+    input_data (dict): A single set of features for testing the API with a single request.
+    response (Response): The response object for the request with a single set of features.
+"""
+
 input_data = {
   "carat": 1.1,
   "cut": "Ideal",
