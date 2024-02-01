@@ -97,110 +97,64 @@ Keep it developer-friendly – after all, not everyone speaks 'data scientist'!
 
 So, ready to add some sparkle to this challenge? Let's make these diamonds shine! 🌟💎✨
 
----
-
-### Italian Power Load
-
-**Problem type**: time series forecasting
-
-**Dataset description**: [Power Load readme](./datasets/italian-power-load/README.md)
-
-Welcome to your first day at the office, and what a charged-up project you have! 
-Your client is Zap Inc, a fictional power player in Italy. 
-They're handing you data on Italy's power load from 2006 to 2022. 
-Marta, your wise colleague, has a piece of advice for you: be careful with 2020, it was a very peculiar year.
-
-#### Challenge 1
-
-Zap Inc asks you for a complete report about the main feature of the power load series.
-The report should be understandable by a layman, but it should also provide enough details to be useful for a data scientist.
-**Create a Jupyter Notebook that sheds light on the main characteristics of the power load data.** 
-Make it clear, make it insightful!
-
-#### Challenge 2
-
-Now, it's time to **predict the future**, well, at least a year into it. 
-Develop a long-term forecasting model for the power load with a forecasting horizon of one year ahead, but let's skip 2020-2022 and use 2019 as your testing ground. 
-Marta's advice: Zap's bosses aren't AI gurus, so your model's accuracy and explainability need to be crystal clear. 
-Illuminate these points with a second notebook.
-
-#### Challenge 3
-
-After mastering the long-term, it's time to zoom in. 
-Your next challenge is to **predict the power load one day ahead**. 
-Again, sideline 2020-2022 and focus on 2019 for testing. 
-Keep Marta's wisdom in mind – clarity is key!
-
-#### Challenge 4
-
-Choose one of your sparkling models and get it ready for the big leagues. 
-Develop an **end-to-end pipeline for training and evaluating your model** on 2020 and 2021 data. 
-Luca, the new CTO at Zap and a self-confessed nerd, demands code that's as clean and structured as it is maintainable. 
-Impress him!
-
-#### Challenge 5
-
-2020 was a tough year for everyone, including your model. 
-Zap Inc isn't thrilled with its performance. 
-**Justify your model's performance in 2020** with a detailed notebook. 
-Explain the unexpected, defend your approach, and remember, every challenge is a learning curve!
-
-Ready to electrify your career with this project? Let's power through! ⚡🔌📈
-
----
-
-### Employee Churn
-
-**Problem type**: classification
-
-**Dataset description**: [Employee churn readme](./datasets/employee-churn/README.md)
-
-Your first client is Pear Inc, a multinational company worried about its poor talent retention.
-Pear has a peculiar hiring strategy. They offer free classes and hire the best students.
-The strategy is working, but many new hires leave the company after a few months. This is a huge waste of time and money.
-
-In the past few months, they collected a dataset with information about their employees and recorded whether they 
-churned or not. Due to the churning period being so short, they are confident that the history of each candidate
-is enough to predict the churn and the experience is Pear is not relevant.
-
-Gabriele, the Head of Talent, is counting on you to put a plug in this problem. 
-And Fabio, an ML Engineer and new colleague of yours, will be eyeing your work too!
-
-#### Challenge 1
-
-Pear Inc needs your help to figure out **what makes an employee stick versus split**. 
-Craft a Jupyter notebook to answer their question. 
-Keep it simple enough for Gabriele but detailed enough to dazzle Fabio.
-
-#### Challenge 2
-
-Next up, Pear Inc needs a crystal ball to foresee who will staty with them. 
-**Develop a model that predicts employee churn**, complete with churn probabilities to help Gabriele take timely action.
-Remember, Gabriele's no fan of black-box machines, and Fabio's looking for proof that your model's magic works.
-
-#### Challenge 3
-
-Your model's a hit, but why does it work wonders? 
-Time to add some transparency to your tech.
-**Make your model interpretable**, showcasing the key features and how each prediction is made. 
-Your audience: both Gabriele and Fabio, so balance simplicity with sophistication.
-
-#### Challenge 4
-
-Now, let's get your model production-ready. 
-**Build an end-to-end pipeline for training your model with new data sets.** 
-Assume the data structure stays the same, and keep your code clean and classy to impress Fabio, a clean code lover.
-
-#### Challenge 5
-
-Bravo! Pear Inc loves your work, and now it's showtime for your model in their web app. 
-**Develop a REST API** to expose your model's predictions. 
-This time, it's all about Fabio - ensure your code is clean, structured, and ready for evolution.
-
-So, ready to tackle Pear Inc's perplexing problem and turn the tide on talent turnover? 
-Let's get cracking! 🍐💼🔍
-
----
 
 ## How to run
-Please fill this section as part of the assignment.
+#### Challenge 1: **what makes a diamond valuable?**
+
+Regarding the question *What makes a diamond valuable?*, an analysis was carried through in the notebook called *EDA* trying to figure out the underlying relations to answer to the question.
+
+As it can be seen in the *Conclusions* section of the notebook, there are several aspectes that should be bear in mind to predict the value of a diamond:
++ The mass or *carat* of the diamond is the **more relevant feature**.
++ The *volume* of the diamond is highly correlated to the *carat* as the density of a diamond is almost constant. Then, if the diamond feels way more lighter that it should be, it is probably fake.
++ Diamonds with a *clarity* **IF1, SW1 and SW2** are the more expensive ones.
++ Diamonds with *color* categories **I** and **J** are the most expensive ones.
++ As the quality of the *cut* increases, the price scales faster with the carat. However, *cut* is the less relevant subjective quality to determine the price of a diamond.
+
+Regarding the EDA perfomed, several steps were considered:
+1. Univariable analysis: The aim was to explore the distribution of the target and features variables. It also helped to identify outliers.
+2. Bivariable Analysis: The aims was to evaluate correlations between the numeric features and the price. As well as, relationships among the features. And, lastly, the impact of categorical features on the price.
+3. Multivariable Analysis: The aim was to investigate interactions between multiple features and their impact on diamond prices. In other words, to consider pairs of features, instead of, one at the time.
+4. Feature Engineering: The aims was to create new features to enhance the predictive power of the analysis.
+5. Statistical Test: The aim was to perform different statistical test to help validate the observed patterns and assess whether they are relevant or not.
+
+#### Challenge 2: Diamond Price Prediction model
+
+The process associated to generate a model for *Diamond Price Prediction* involved several steps. As it can be seen in the notebook called *RegressorModel*:
+
+1. Data Processing considering the steps analyzed in the EDA.
+2. Define and train a Preprocessor to scale the numeric features and encode the categorical ones.
+3. Train and compare several regression models to determine which are the more appealing ones for the application. In this case, the better performing ones were XGBoost and RandomForest.
+4. Then, a feature relevance analysis was performed to understand which were the more relevant aspects of a diamond to make the predictions. In this case, as partially observed during the EDA, the more relevant features were:
+    1. Carat or Volume, i.e, a feature related to the size of the diamond.
+    2. The Clarity of the diamond.
+    3. The Color
+    4. The cut, which was previously stated as the less relevant categorical feature.
+    5. Depth and Table which are geometric features with low correlation with the price.
+5. A hyperparameter Tuning was performed to find optimal configuration for the choosen models.
+6. Model evaluation to determine the performance of the choosen models
+7. Creating an ensamble averaging the predictions of both models considered to boost accuracy.
+8. As keeping the model updated it is an important step in production, I considered as important to try to incorporate a second model that could be partially trained with fresh data. This is because RandomForestRegressors cannot be partially trained in their standard form, only XGBoost can. However, the performance of the considered models, such as the SGD regressor was to poor to consider it in the application. 
+9. Saving the models for next steps.
+
+
+#### Challenge 3: Automated Pipeline
+
+To keep the model as sharp as the diamonds it assesses, a pipeline was developed in the notebook called *TrainingPipeline*.
+
+The final version of the pipeline:
++ Gets the data from a new csv file
++ Process the data accordingly to what the model is expecting as input
++ Fit the model with the new data. In this case, as it was mentioned, onyl he XGBoost model can be partially trained.
++ Incorporates a logger to keep track of the model performance.
++ Saves the updated model.
+
+#### Challenge 4: REST API
+
+In order to run the API, the file *XTream_API.py* should be executed.
+
+The API includes:
++ A Health Check homepage to check that the api is running properly.
++ A predict method/call that can handle single queries or a list of queries.
+To test the prediction of the api, two request programs were considered. A base one (*request.py*) which only generates a single request to the API. And a more complete case (*request_v2.py*) which generates two queries to the api, a single one and a list type one.
+
+The API also includes a logger for monitoring purposes and a modified version of the pipeline generated for the previous challenge, so it's adapted to a prediction kind input.
