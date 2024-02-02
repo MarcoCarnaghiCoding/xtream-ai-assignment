@@ -8,6 +8,8 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
+# GENERAL PURPOSE METHODS
+
 def save_object(file_path, obj):
     try:
         dir_path = os.path.dirname(file_path)
@@ -27,6 +29,8 @@ def load_object(file_path):
 
     except Exception as e:
         raise CustomException(e, sys)
+
+# PREPROCESSING METHODS
 
 def feature_engineering(df):
     """
@@ -64,6 +68,38 @@ def removing_outliers(df):
     conditions = [
         (df['z'] < 2),
         (df['y'] < 2),
+        (df['x'] < 2),
+        (df['table'] > 75),
+        (df['depth'] < 50),
+        (df['density'] < 0.008)
+
+    ]
+
+    # Create a mask for the rows to be removed
+    mask = np.any(conditions, axis=0)
+
+    # Drop the rows that meet the conditions
+    df = df[~mask]
+    return df
+
+def removing_outliers_training(df):
+    """
+    A function to remove outliers from the input dataframe based on specified conditions.
+    
+    Parameters:
+    df (DataFrame): The input dataframe containing the data to be processed.
+    
+    Returns:
+    DataFrame: The dataframe with the outliers removed.
+    """
+    # Define the conditions for removing outliers
+    conditions = [
+        (df['carat'] > 0) & (df['price'] < 100),
+        (df['z'] > 2) & (df['price'] < 100),
+        (df['z'] < 2),
+        (df['y'] > 3) & (df['price'] < 100),
+        (df['y'] < 2),
+        (df['x'] > 2) & (df['price'] < 100),
         (df['x'] < 2),
         (df['table'] > 75),
         (df['depth'] < 50),
@@ -126,3 +162,28 @@ def preprocess_data_to_predict( df,preprocessor,
     X_preprocessed = preprocessor.transform(df)
 
     return X_preprocessed
+
+
+
+# TRAINING PIPELINE CLASS
+def preprocess_data_to_train (  df,
+                                preprocessor,
+                                numeric_features = ['volume', 'carat', 'depth', 'table'],
+                                categorical_features = ['color', 'cut', 'clarity'],
+                                target = 'price'):
+
+    # Adding Features
+    df = feature_engineering(df)
+
+    # Removing Outliers
+    df = removing_outliers_training(df)
+
+    # Drop redundant features
+    df = drop_redundant_features(df) 
+
+    # Preprocess the data
+    X_new = df.drop(target, axis=1)
+    y_new = df[target]
+    X_new_preprocessed = preprocessor.transform(X_new)
+
+    return X_new_preprocessed , y_new

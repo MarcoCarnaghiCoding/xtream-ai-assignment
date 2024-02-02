@@ -156,5 +156,6 @@ The API includes:
 + A Health Check homepage to check that the api is running properly.
 + A predict method/call that can handle single queries or a list of queries.
 To test the prediction of the api, two request programs were considered. A base one (*request.py*) which only generates a single request to the API. And a more complete case (*request_v2.py*) which generates two queries to the api, a single one and a list type one.
-
 The API also includes a logger for monitoring purposes and a modified version of the pipeline generated for the previous challenge, so it's adapted to a prediction kind input.
++ A train method/call which takes a single or a list of features set to train the XGBoost model. An example of train request is provided in the *trainrequest.py* file. The data/logging from the training evaluation and data is stored in a log file dedicated to this call, keeping it apart from the other queries to the API (the prediction ones).
+
